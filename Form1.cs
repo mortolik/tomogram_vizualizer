@@ -117,6 +117,20 @@ namespace Morozov_tomogram_visualizer
             needReload = false;
             glControl1.Invalidate();
         }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            view.SetTransferFunction(trackBar2.Value, trackBar3.Value);
+            needReload = true;
+            glControl1.Invalidate();
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            view.SetTransferFunction(trackBar2.Value, trackBar3.Value);
+            needReload = true;
+            glControl1.Invalidate();
+        }
     }
 
 }

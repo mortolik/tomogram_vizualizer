@@ -12,6 +12,8 @@ namespace Morozov_tomogram_visualizer
 {
     class View
     {
+        private int tfMin = 0;
+        private int tfWidth = 2000;
         public void SetupView(int width, int height)
         {
             GL.ShadeModel(ShadingModel.Smooth);
@@ -23,9 +25,7 @@ namespace Morozov_tomogram_visualizer
 
         public Color TransferFunction(short value)
         {
-            int min = 0;
-            int max = 2000;
-            int newVal = Math.Clamp((value - min) * 255 / (max - min), 0, 255);
+            int newVal = Math.Clamp((value - tfMin) * 255 / tfWidth, 0, 255);
             return Color.FromArgb(255, newVal, newVal, newVal);
         }
 
@@ -136,5 +136,11 @@ namespace Morozov_tomogram_visualizer
 
             GL.Disable(EnableCap.Texture2D);
         }
+        public void SetTransferFunction(int min, int width)
+        {
+            tfMin = min;
+            tfWidth = width;
+        }
+
     }
 }

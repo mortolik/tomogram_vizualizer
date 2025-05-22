@@ -35,8 +35,12 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             checkBox1 = new CheckBox();
             checkBox2 = new CheckBox();
+            trackBar2 = new TrackBar();
+            trackBar3 = new TrackBar();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -44,7 +48,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(1139, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -92,11 +96,35 @@
             checkBox2.UseVisualStyleBackColor = true;
             checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             // 
+            // trackBar2
+            // 
+            trackBar2.Location = new Point(110, 531);
+            trackBar2.Name = "trackBar2";
+            trackBar2.Size = new Size(561, 45);
+            trackBar2.TabIndex = 5;
+            trackBar2.Minimum = 0;
+            trackBar2.Maximum = 5000; // Максимальное значение плотности
+            trackBar2.Value = 0;
+            trackBar2.Scroll += trackBar2_Scroll;
+            // 
+            // trackBar3
+            // 
+            trackBar3.Location = new Point(110, 585);
+            trackBar3.Name = "trackBar3";
+            trackBar3.Size = new Size(561, 45);
+            trackBar3.TabIndex = 6;
+            trackBar3.Minimum = 100;  // Минимальная ширина
+            trackBar3.Maximum = 5000; // Максимальная ширина
+            trackBar3.Value = 2000;   // Стандартное значение
+            trackBar3.Scroll += trackBar3_Scroll;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1139, 632);
+            Controls.Add(trackBar3);
+            Controls.Add(trackBar2);
             Controls.Add(checkBox2);
             Controls.Add(checkBox1);
             Controls.Add(trackBar1);
@@ -107,6 +135,8 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -120,5 +150,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private CheckBox checkBox1;
         private CheckBox checkBox2;
+        private TrackBar trackBar2;
+        private TrackBar trackBar3;
     }
 }
