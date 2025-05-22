@@ -11,6 +11,7 @@ namespace Morozov_tomogram_visualizer
         bool loaded = false;
         int currentLayer = 0;
         bool needReload = false;
+        bool quadStripMode = false;
         private bool textureMode = false;
         int FrameCount = 0;
         GLControl glControl1;
@@ -65,6 +66,11 @@ namespace Morozov_tomogram_visualizer
                     }
                     view.DrawTexture();
                 }
+
+                else if (quadStripMode)
+                {
+                    view.DrawQuadStrip(currentLayer);
+                }
                 else
                 {
                     view.DrawQuads(currentLayer);
@@ -102,6 +108,13 @@ namespace Morozov_tomogram_visualizer
         {
             textureMode = checkBox1.Checked;
             needReload = true;
+            glControl1.Invalidate();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            quadStripMode = checkBox2.Checked;
+            needReload = false;
             glControl1.Invalidate();
         }
     }

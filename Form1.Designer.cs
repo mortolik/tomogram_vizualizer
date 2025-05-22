@@ -34,6 +34,7 @@
             trackBar1 = new TrackBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
@@ -80,11 +81,23 @@
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(678, 55);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(120, 19);
+            checkBox2.TabIndex = 4;
+            checkBox2.Text = "QuadStrip режим";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(checkBox2);
             Controls.Add(checkBox1);
             Controls.Add(trackBar1);
             Controls.Add(menuStrip1);
@@ -106,5 +119,6 @@
         private TrackBar trackBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private CheckBox checkBox1;
+        private CheckBox checkBox2;
     }
 }
