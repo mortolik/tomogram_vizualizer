@@ -32,7 +32,9 @@
             файлToolStripMenuItem = new ToolStripMenuItem();
             открытьToolStripMenuItem = new ToolStripMenuItem();
             glControl1 = new OpenTK.GLControl.GLControl();
+            trackBar1 = new TrackBar();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -54,7 +56,7 @@
             // открытьToolStripMenuItem
             // 
             открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            открытьToolStripMenuItem.Size = new Size(180, 22);
+            открытьToolStripMenuItem.Size = new Size(121, 22);
             открытьToolStripMenuItem.Text = "Открыть";
             открытьToolStripMenuItem.Click += открытьToolStripMenuItem_Click;
             // 
@@ -72,11 +74,20 @@
             glControl1.TabIndex = 1;
             glControl1.Paint += glControl1_Paint;
             // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(110, 30);
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(561, 45);
+            trackBar1.TabIndex = 2;
+            trackBar1.Scroll += trackBar1_Scroll;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(trackBar1);
             Controls.Add(glControl1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -84,6 +95,7 @@
             Text = "Form1";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -94,5 +106,6 @@
         private ToolStripMenuItem файлToolStripMenuItem;
         private ToolStripMenuItem открытьToolStripMenuItem;
         private OpenTK.GLControl.GLControl glControl1;
+        private TrackBar trackBar1;
     }
 }

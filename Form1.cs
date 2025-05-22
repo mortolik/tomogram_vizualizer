@@ -39,5 +39,11 @@ namespace Morozov_tomogram_visualizer
                 glControl1.SwapBuffers();
             }
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            currentLayer = trackBar1.Value;
+            needReload = true;
+        }
     }
 }
