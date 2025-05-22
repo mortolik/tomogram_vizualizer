@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <!-- Добавьте эту строку -->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK" Version="4.9.4" />
-    <PackageReference Include="OpenTK.GLControl" Version="4.0.2" />
+    <PackageReference Include="OpenTK.GLControl" Version="3.3.3" />
+    <PackageReference Include="OpenTK" Version="3.3.3" />
   </ItemGroup>
-
 </Project>

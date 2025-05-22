@@ -31,8 +31,8 @@
             menuStrip1 = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
             открытьToolStripMenuItem = new ToolStripMenuItem();
-            glControl1 = new OpenTK.GLControl.GLControl();
             trackBar1 = new TrackBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
@@ -60,20 +60,6 @@
             открытьToolStripMenuItem.Text = "Открыть";
             открытьToolStripMenuItem.Click += открытьToolStripMenuItem_Click;
             // 
-            // glControl1
-            // 
-            glControl1.API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
-            glControl1.APIVersion = new Version(3, 3, 0, 0);
-            glControl1.Flags = OpenTK.Windowing.Common.ContextFlags.Default;
-            glControl1.IsEventDriven = true;
-            glControl1.Location = new Point(26, 80);
-            glControl1.Name = "glControl1";
-            glControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
-            glControl1.SharedContext = null;
-            glControl1.Size = new Size(469, 258);
-            glControl1.TabIndex = 1;
-            glControl1.Paint += glControl1_Paint;
-            // 
             // trackBar1
             // 
             trackBar1.Location = new Point(110, 30);
@@ -88,7 +74,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(trackBar1);
-            Controls.Add(glControl1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
@@ -105,7 +90,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem файлToolStripMenuItem;
         private ToolStripMenuItem открытьToolStripMenuItem;
-        private OpenTK.GLControl.GLControl glControl1;
         private TrackBar trackBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

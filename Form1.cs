@@ -12,12 +12,31 @@ namespace Morozov_tomogram_visualizer
         int currentLayer = 0;
         bool needReload = false;
         int FrameCount = 0;
+        GLControl glControl1;
         DateTime NextFPSUpdate = DateTime.Now.AddSeconds(1);
         public Form1()
         {
             InitializeComponent();
-        }
 
+            this.glControl1 = new OpenTK.GLControl();
+            this.glControl1.BackColor = System.Drawing.Color.Black;
+            this.glControl1.Location = new System.Drawing.Point(40, 80);
+            this.glControl1.Name = "glControl1";
+            this.glControl1.Size = new System.Drawing.Size(800, 600);
+            this.glControl1.TabIndex = 0;
+            this.glControl1.VSync = false;
+            this.glControl1.Load += GlControl1_Load;
+            this.glControl1.Paint += glControl1_Paint;
+            this.Controls.Add(this.glControl1);
+
+
+            Application.Idle += Application_Idle;
+        }
+        private void GlControl1_Load(object sender, EventArgs e)
+        {
+
+            GL.ClearColor(Color.Black);
+        }
         private void îòêðûòüToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -44,6 +63,24 @@ namespace Morozov_tomogram_visualizer
         {
             currentLayer = trackBar1.Value;
             needReload = true;
+        }
+        void displayFPS()
+        {
+            if (DateTime.Now >= NextFPSUpdate)
+            {
+                this.Text = String.Format("CT Visualizer (fps={0})", FrameCount);
+                NextFPSUpdate = DateTime.Now.AddSeconds(1);
+                FrameCount = 0;
+            }
+            FrameCount++;
+        }
+        void Application_Idle(object sender, EventArgs e)
+        {
+            while (glControl1.IsIdle)
+            {
+                displayFPS();
+                glControl1.Invalidate();
+            }
         }
     }
 }
