@@ -11,6 +11,7 @@ namespace Morozov_tomogram_visualizer
         bool loaded = false;
         int currentLayer = 0;
         bool needReload = false;
+        private bool textureMode = false;
         int FrameCount = 0;
         GLControl glControl1;
         DateTime NextFPSUpdate = DateTime.Now.AddSeconds(1);
@@ -54,7 +55,20 @@ namespace Morozov_tomogram_visualizer
         {
             if (loaded)
             {
-                view.DrawQuads(currentLayer);
+                if (textureMode)
+                {
+                    if (needReload)
+                    {
+                        view.generateTextureImage(currentLayer);
+                        view.Load2DTexture();
+                        needReload = false;
+                    }
+                    view.DrawTexture();
+                }
+                else
+                {
+                    view.DrawQuads(currentLayer);
+                }
                 glControl1.SwapBuffers();
             }
         }
@@ -63,6 +77,7 @@ namespace Morozov_tomogram_visualizer
         {
             currentLayer = trackBar1.Value;
             needReload = true;
+            glControl1.Invalidate();
         }
         void displayFPS()
         {
@@ -82,5 +97,13 @@ namespace Morozov_tomogram_visualizer
                 glControl1.Invalidate();
             }
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textureMode = checkBox1.Checked;
+            needReload = true;
+            glControl1.Invalidate();
+        }
     }
+
 }
