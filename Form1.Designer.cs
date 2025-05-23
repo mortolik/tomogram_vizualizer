@@ -37,6 +37,8 @@
             checkBox2 = new CheckBox();
             trackBar2 = new TrackBar();
             trackBar3 = new TrackBar();
+            checkBox3 = new CheckBox();
+            checkBox4 = new CheckBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
@@ -48,7 +50,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1139, 24);
+            menuStrip1.Size = new Size(1018, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -77,7 +79,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(677, 30);
+            checkBox1.Location = new Point(860, 31);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(117, 19);
             checkBox1.TabIndex = 3;
@@ -88,7 +90,7 @@
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(678, 55);
+            checkBox2.Location = new Point(861, 56);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(120, 19);
             checkBox2.TabIndex = 4;
@@ -98,31 +100,53 @@
             // 
             // trackBar2
             // 
-            trackBar2.Location = new Point(110, 531);
+            trackBar2.Location = new Point(110, 736);
+            trackBar2.Maximum = 5000;
             trackBar2.Name = "trackBar2";
             trackBar2.Size = new Size(561, 45);
             trackBar2.TabIndex = 5;
-            trackBar2.Minimum = 0;
-            trackBar2.Maximum = 5000; // Максимальное значение плотности
-            trackBar2.Value = 0;
             trackBar2.Scroll += trackBar2_Scroll;
             // 
             // trackBar3
             // 
-            trackBar3.Location = new Point(110, 585);
+            trackBar3.Location = new Point(110, 790);
+            trackBar3.Maximum = 5000;
+            trackBar3.Minimum = 100;
             trackBar3.Name = "trackBar3";
             trackBar3.Size = new Size(561, 45);
             trackBar3.TabIndex = 6;
-            trackBar3.Minimum = 100;  // Минимальная ширина
-            trackBar3.Maximum = 5000; // Максимальная ширина
-            trackBar3.Value = 2000;   // Стандартное значение
+            trackBar3.Value = 2000;
             trackBar3.Scroll += trackBar3_Scroll;
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(860, 82);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(95, 19);
+            checkBox3.TabIndex = 7;
+            checkBox3.Text = "Сверху-вниз";
+            checkBox3.UseVisualStyleBackColor = true;
+            checkBox3.CheckedChanged += checkBox3_CheckedChanged;
+            // 
+            // checkBox4
+            // 
+            checkBox4.AutoSize = true;
+            checkBox4.Location = new Point(861, 105);
+            checkBox4.Name = "checkBox4";
+            checkBox4.Size = new Size(110, 19);
+            checkBox4.TabIndex = 8;
+            checkBox4.Text = "Справа-налево";
+            checkBox4.UseVisualStyleBackColor = true;
+            checkBox4.CheckedChanged += checkBox4_CheckedChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1139, 632);
+            ClientSize = new Size(1018, 847);
+            Controls.Add(checkBox4);
+            Controls.Add(checkBox3);
             Controls.Add(trackBar3);
             Controls.Add(trackBar2);
             Controls.Add(checkBox2);
@@ -152,5 +176,7 @@
         private CheckBox checkBox2;
         private TrackBar trackBar2;
         private TrackBar trackBar3;
+        private CheckBox checkBox3;
+        private CheckBox checkBox4;
     }
 }

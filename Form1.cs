@@ -15,6 +15,10 @@ namespace Morozov_tomogram_visualizer
         private bool textureMode = false;
         int FrameCount = 0;
         GLControl glControl1;
+
+        bool flipVertically = false;
+        bool flipHorizontally = false;
+
         DateTime NextFPSUpdate = DateTime.Now.AddSeconds(1);
         public Form1()
         {
@@ -56,6 +60,7 @@ namespace Morozov_tomogram_visualizer
         {
             if (loaded)
             {
+                view.SetFlip(flipVertically, flipHorizontally);
                 if (textureMode)
                 {
                     if (needReload)
@@ -129,6 +134,18 @@ namespace Morozov_tomogram_visualizer
         {
             view.SetTransferFunction(trackBar2.Value, trackBar3.Value);
             needReload = true;
+            glControl1.Invalidate();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            flipVertically = ((CheckBox)sender).Checked;
+            glControl1.Invalidate();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            flipHorizontally = ((CheckBox)sender).Checked;
             glControl1.Invalidate();
         }
     }

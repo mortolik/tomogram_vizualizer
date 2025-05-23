@@ -33,51 +33,104 @@ namespace Morozov_tomogram_visualizer
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Begin(BeginMode.Quads);
-            for (int x_coord = 0; x_coord < Bin.X - 1; x_coord++)
-                for (int y_coord = 0; y_coord < Bin.Y - 1; y_coord++)
+            for (int x = 0; x < Bin.X - 1; x++)
+            {
+                for (int y = 0; y < Bin.Y - 1; y++)
                 {
+                    int x0, x1, y0, y1;
+
+                    if (m_flipHorizontally)
+                    {
+                        x0 = Bin.X - 1 - x;
+                        x1 = Bin.X - 2 - x;
+                    }
+                    else
+                    {
+                        x0 = x;
+                        x1 = x + 1;
+                    }
+
+                    if (m_flipVertically)
+                    {
+                        y0 = Bin.Y - 1 - y;
+                        y1 = Bin.Y - 2 - y;
+                    }
+                    else
+                    {
+                        y0 = y;
+                        y1 = y + 1;
+                    }
+
+
                     short value;
-                    //1 вершина
-                    value = Bin.array[x_coord + y_coord * Bin.X + layerNumber * Bin.X * Bin.Y];
+
+                    value = Bin.array[x + y * Bin.X + layerNumber * Bin.X * Bin.Y];
                     GL.Color3(TransferFunction(value));
-                    GL.Vertex2(x_coord, y_coord);
-                    //2 вершина
-                    value = Bin.array[x_coord + (y_coord + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
+                    GL.Vertex2(x0, y0);
+
+                    value = Bin.array[x + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
                     GL.Color3(TransferFunction(value));
-                    GL.Vertex2(x_coord, y_coord + 1);
-                    //3 вершина
-                    value = Bin.array[x_coord + 1 + (y_coord + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
+                    GL.Vertex2(x0, y1);
+
+                    value = Bin.array[(x + 1) + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
                     GL.Color3(TransferFunction(value));
-                    GL.Vertex2(x_coord + 1, y_coord + 1);
-                    //4 вершина
-                    value = Bin.array[x_coord + 1 + y_coord * Bin.X + layerNumber * Bin.X * Bin.Y];
+                    GL.Vertex2(x1, y1);
+
+                    value = Bin.array[(x + 1) + y * Bin.X + layerNumber * Bin.X * Bin.Y];
                     GL.Color3(TransferFunction(value));
-                    GL.Vertex2(x_coord + 1, y_coord);
+                    GL.Vertex2(x1, y0);
                 }
+            }
             GL.End();
         }
+
         public void DrawQuadStrip(int layerNumber)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Begin(BeginMode.QuadStrip);
 
-            for (int y_coord = 0; y_coord < Bin.Y - 1; y_coord++)
+            for (int y = 0; y < Bin.Y - 1; y++)
             {
-                for (int x_coord = 0; x_coord < Bin.X; x_coord++)
+                for (int x = 0; x < Bin.X; x++)
                 {
-                    // Вершины для текущей строки (y)
-                    short value = Bin.array[x_coord + y_coord * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
-                    GL.Vertex2(x_coord, y_coord);
+                    int drawX;
+                    int drawY1;
+                    int drawY2;
 
-                    // Вершины для следующей строки (y+1)
-                    value = Bin.array[x_coord + (y_coord + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
+                    if (m_flipHorizontally)
+                    {
+                        drawX = Bin.X - 1 - x;
+                    }
+                    else
+                    {
+                        drawX = x;
+                    }
+
+                    if (m_flipVertically)
+                    {
+                        drawY1 = Bin.Y - 1 - y;
+                        drawY2 = Bin.Y - 2 - y;
+                    }
+                    else
+                    {
+                        drawY1 = y;
+                        drawY2 = y + 1;
+                    }
+
+
+                    short value = Bin.array[x + y * Bin.X + layerNumber * Bin.X * Bin.Y];
                     GL.Color3(TransferFunction(value));
-                    GL.Vertex2(x_coord, y_coord + 1);
+                    GL.Vertex2(drawX, drawY1);
+
+                    value = Bin.array[x + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
+                    GL.Color3(TransferFunction(value));
+                    GL.Vertex2(drawX, drawY2);
                 }
             }
+
             GL.End();
         }
+
 
         Bitmap textureImage;
         int VBOtexture;
@@ -122,25 +175,57 @@ namespace Morozov_tomogram_visualizer
             GL.Enable(EnableCap.Texture2D);
             GL.BindTexture(TextureTarget.Texture2D, VBOtexture);
 
+            float x0, x1, y0, y1;
+
+            if (m_flipHorizontally)
+            {
+                x0 = 1f;
+                x1 = 0f;
+            }
+            else
+            {
+                x0 = 0f;
+                x1 = 1f;
+            }
+
+            if (m_flipVertically)
+            {
+                y0 = 1f;
+                y1 = 0f;
+            }
+            else
+            {
+                y0 = 0f;
+                y1 = 1f;
+            }
+
+
             GL.Begin(BeginMode.Quads);
             GL.Color3(Color.White);
-            GL.TexCoord2(0f, 0f);
-            GL.Vertex2(0, 0);
-            GL.TexCoord2(0f, 1f);
-            GL.Vertex2(0, Bin.Y);
-            GL.TexCoord2(1f, 1f);
-            GL.Vertex2(Bin.X, Bin.Y);
-            GL.TexCoord2(1f, 0f);
-            GL.Vertex2(Bin.X, 0);
+            GL.TexCoord2(x0, y0); GL.Vertex2(0, 0);
+            GL.TexCoord2(x0, y1); GL.Vertex2(0, Bin.Y);
+            GL.TexCoord2(x1, y1); GL.Vertex2(Bin.X, Bin.Y);
+            GL.TexCoord2(x1, y0); GL.Vertex2(Bin.X, 0);
             GL.End();
 
             GL.Disable(EnableCap.Texture2D);
         }
+
         public void SetTransferFunction(int min, int width)
         {
             tfMin = min;
             tfWidth = width;
         }
+
+        private bool m_flipVertically = false;
+        private bool m_flipHorizontally = false;
+
+        public void SetFlip(bool vertical, bool horizontal)
+        {
+            m_flipVertically = vertical;
+            m_flipHorizontally = horizontal;
+        }
+
 
     }
 }
